@@ -1,0 +1,44 @@
+
+<p-dialog [(visible)]="viewDialog" [style]="{width: '70vw'}" header="{{'materielTabPan' | translate}}" [modal]="true" styleClass="p-fluid">
+    <ng-template pTemplate="content">
+        <p-tabView>
+            <p-tabPanel header="{{'materielTabPan' | translate}}">
+                <div class="grid">
+                    <div class="field col-12 md:col-6">
+                        <label for="1">{{'Libelle' | translate}}</label>
+                        <input class="mb-2 mr-2" type="text" pInputText [disabled]="true" placeholder="{{'Libelle' | translate}}" autofocus  id="1" [(ngModel)]="item.libelle">
+                    </div>
+                    <div class="field col-12 md:col-6">
+                        <label for="2">{{'Reference' | translate}}</label>
+                        <input class="mb-2 mr-2" type="text" pInputText [disabled]="true" placeholder="{{'Reference' | translate}}" autofocus  id="2" [(ngModel)]="item.reference">
+                    </div>
+                    <div class="field col-12 md:col-6">
+                        <label for="3">{{'Quantite' | translate}}</label>
+                        <input class="mb-2 mr-2" type="text" pInputText [disabled]="true" placeholder="{{'Quantite' | translate}}" autofocus  id="3" [(ngModel)]="item.quantite">
+                    </div>
+                    <div class="field col-12 md:col-6">
+                        <label for="4">{{'Categorie materiel' | translate}}</label>
+                        <p-dropdown [options]="categorieMateriels" [(ngModel)]="item.categorieMateriel" id="4" [disabled]="true" optionLabel="libelle" placeholder="{{'Categorie materiel' | translate}}"></p-dropdown>
+                    </div>
+                    <div class="field col-12 md:col-6">
+                        <label for="5">{{'Prix' | translate}}</label>
+                        <p-inputNumber class="mb-2 mr-2" id="5" [disabled]="true" placeholder="{{'Prix' | translate}}" [(ngModel)]="item.prix"></p-inputNumber>
+                    </div>
+                </div>
+            </p-tabPanel>
+
+        </p-tabView>
+
+    </ng-template>
+
+    <ng-template pTemplate="footer" >
+        <div class="grid-footer">
+            <div>
+                <button pButton pRipple label="Annuler" icon="pi pi-times" class="p-button-outlined" (click)="hideViewDialog()"></button>
+            </div>
+        </div>
+    </ng-template>
+</p-dialog>
+
+
+

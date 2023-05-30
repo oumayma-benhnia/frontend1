@@ -1,0 +1,69 @@
+        <p-dialog [(visible)]="editDialog" [style]="{width: '70vw'}" header="{{'comptableTabPan' | translate}}" [modal]="true" styleClass="p-fluid" [maximizable]="true" [draggable]="false" [resizable]="false">
+            <ng-template pTemplate="content" >
+                <p-tabView>
+                    <p-tabPanel header="{{'comptableTabPan' | translate}}">
+                        <div class="grid">
+
+
+                                        <div class="field col-12 md:col-6">
+                                            <label for="1">{{'comptableCode' | translate}}<span style="color: red;">*</span></label>
+                                            <input   appendTo="body" class="mb-2 mr-2" type="text" pInputText placeholder="{{'comptableCode' | translate}}" id="1" [(ngModel)]="item.code"
+                                                    [ngClass]="{'ng-invalid ng-dirty' : !validComptableCode}"  />
+                                            <small class='p-error' *ngIf='!validComptableCode'>Code est obligatoire.</small>
+                                        </div>
+
+                                        <div class="field col-12 md:col-6">
+                                            <label for="2">{{'comptableNom' | translate}}</label>
+                                            <input   appendTo="body" class="mb-2 mr-2" type="text" pInputText placeholder="{{'comptableNom' | translate}}" id="2" [(ngModel)]="item.nom"
+                                                     />
+                                            
+                                        </div>
+
+                                        <div class="field col-12 md:col-6">
+                                            <label for="3">{{'comptablePrenom' | translate}}</label>
+                                            <input   appendTo="body" class="mb-2 mr-2" type="text" pInputText placeholder="{{'comptablePrenom' | translate}}" id="3" [(ngModel)]="item.prenom"
+                                                     />
+                                            
+                                        </div>
+
+                                        <div class="field col-12 md:col-6">
+                                            <label for="4">{{'comptableEmail' | translate}}</label>
+                                            <input   appendTo="body" class="mb-2 mr-2" type="text" pInputText placeholder="{{'comptableEmail' | translate}}" id="4" [(ngModel)]="item.email"
+                                                     />
+                                            
+                                        </div>
+
+                                        <div class="field col-12 md:col-6">
+                                            <label for="5">{{'comptableTele' | translate}}</label>
+                                            <input   appendTo="body" class="mb-2 mr-2" type="text" pInputText placeholder="{{'comptableTele' | translate}}" id="5" [(ngModel)]="item.tele"
+                                                     />
+                                            
+                                        </div>
+
+                                        <div class="field col-12 md:col-6">
+                                            <label for="6">{{'comptableSalaire' | translate}}</label>
+                                            <p-inputNumber  appendTo="body" class="mb-2 mr-2" id="6"
+                                                           placeholder="{{'comptableSalaire' | translate}}" [(ngModel)]="item.salaire"  >
+                                            </p-inputNumber>
+                                            
+                                        </div>
+                        </div>
+                    </p-tabPanel>
+
+                </p-tabView>
+            </ng-template>
+
+            <ng-template pTemplate="footer" >
+                <div class="grid-footer">
+                        <div>
+                            <button pButton pRipple label="Annuler" icon="pi pi-times" class="p-button-outlined" (click)="hideEditDialog()"></button>
+                        </div>
+                    <div>
+                        <button pButton pRipple label="Valider" icon="pi pi-check" style="margin:10px" (click)="edit()"></button>
+                    </div>
+                </div>
+            </ng-template>
+
+
+
+    </p-dialog>

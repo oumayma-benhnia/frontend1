@@ -1,0 +1,58 @@
+        <p-dialog [(visible)]="createDialog" [style]="{width: '70vw'}" header="{{'declarationTabPan' | translate}}" [modal]="true" styleClass="p-fluid" [maximizable]="true" [draggable]="false" [resizable]="false">
+            <ng-template pTemplate="content" >
+                        <p-tabView>
+                            <p-tabPanel header="{{'declarationTabPan' | translate}}">
+                                <div class="grid">
+
+                                                <div class="field col-12 md:col-6">
+                                                    <label for="1">{{'declarationReference' | translate}}<span style="color: red;">*</span></label>
+                                                    <input class="mb-2 mr-2" type="text" pInputText  placeholder="{{'declarationReference' | translate}}" id="1" [(ngModel)]="item.reference"
+                                                            [ngClass]="{'ng-invalid ng-dirty' : !validDeclarationReference}"  />
+                                                    <small class='p-error' *ngIf='!validDeclarationReference'>Reference est obligatoire.</small>
+                                                </div>
+
+
+
+                                                <div class="field col-12 md:col-6">
+                                                    <label for="2">{{'declarationLibelle' | translate}}<span style="color: red;">*</span></label>
+                                                    <input class="mb-2 mr-2" type="text" pInputText  placeholder="{{'declarationLibelle' | translate}}" id="2" [(ngModel)]="item.libelle"
+                                                            [ngClass]="{'ng-invalid ng-dirty' : !validDeclarationLibelle}"  />
+                                                    <small class='p-error' *ngIf='!validDeclarationLibelle'>Libelle est obligatoire.</small>
+                                                </div>
+
+
+
+                                            <div class="field col-11 md:col-5">
+                                                <label for="3">{{'declarationTypeDeclaration' | translate}}</label>
+                                                <p-dropdown  appendTo="body"  [options]="typeDeclarations" [(ngModel)]="item.typeDeclaration" id="3" [filter]="true" filterMatchMode="contains"
+                                                        [showClear]="true" optionLabel="libelle" placeholder="{{'declarationTypeDeclaration' | translate}}"  >
+                                                </p-dropdown>
+                                                
+                                            </div>
+                                                <div class="col-1">
+                                                    <label></label>
+                                                    <button pButton pRipple type="button" icon="pi pi-plus" (click)="openCreateTypeDeclaration('TypeDeclaration')" class="p-button-success one-colonne-btn-success-align"></button>
+                                                </div>
+                                </div>
+                            </p-tabPanel>
+
+                        </p-tabView>
+
+            </ng-template>
+
+            <ng-template pTemplate="footer" >
+                <div class="grid-step">
+                        <div style="margin-left: auto;">
+                            <button pButton pRipple  label="{{'validate' | translate}}"  icon="pi pi-check" style="margin:10px" (click)="save()"></button>
+                        </div>
+                        <div>
+                            <button pButton pRipple  label="{{'cancel' | translate}}" icon="pi pi-times" class="p-button-outlined" (click)="hideCreateDialog()"></button>
+                        </div>
+
+                </div>
+            </ng-template>
+
+            <app-type-declaration-create-admin></app-type-declaration-create-admin>
+
+
+    </p-dialog>

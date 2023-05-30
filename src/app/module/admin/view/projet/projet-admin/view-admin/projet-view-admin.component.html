@@ -1,0 +1,148 @@
+
+<p-dialog [(visible)]="viewDialog" [style]="{width: '70vw'}" header="{{'projetTabPan' | translate}}" [modal]="true" styleClass="p-fluid">
+    <ng-template pTemplate="content">
+        <p-tabView>
+            <p-tabPanel header="{{'projetTabPan' | translate}}">
+                <div class="grid">
+                    <div class="field col-12 md:col-3">
+                        <label for="1">{{'Code' | translate}}</label>
+                        <input class="mb-2 mr-2" type="text" pInputText [disabled]="true" placeholder="{{'Code' | translate}}" autofocus  id="1" [(ngModel)]="item.code">
+                    </div>
+                    <div class="field col-12 md:col-3">
+                        <label for="2">{{'Libelle' | translate}}</label>
+                        <input class="mb-2 mr-2" type="text" pInputText [disabled]="true" placeholder="{{'Libelle' | translate}}" autofocus  id="2" [(ngModel)]="item.libelle">
+                    </div>
+                    <div class="field col-12 md:col-3">
+                        <label for="3">{{'Type projet' | translate}}</label>
+                        <p-dropdown [options]="typeProjets" [(ngModel)]="item.typeProjet" id="3" [disabled]="true" optionLabel="libelle" placeholder="{{'Type projet' | translate}}"></p-dropdown>
+                    </div>
+                    <div class="field col-12 md:col-3">
+                        <label for="4">{{'Budget' | translate}}</label>
+                        <p-inputNumber class="mb-2 mr-2" id="4" [disabled]="true" placeholder="{{'Budget' | translate}}" [(ngModel)]="item.budget"></p-inputNumber>
+                    </div>
+                    <div class="field col-12 md:col-3">
+                        <label for="5">{{'Progression' | translate}}</label>
+                        <textarea id="5" pInputTextarea rows="5" cols="30" [disabled]="true" placeholder="{{'Progression' | translate}}"  [(ngModel)]="item.progression"></textarea>
+                    </div>
+                    <div class="field col-12 md:col-3">
+                        <label for="6">{{'Date debut' | translate}}</label>
+                        <p-calendar id="6" [disabled]="true"  [showTime]="true" [showSeconds]="false" placeholder="{{'Date debut' | translate}}"  [(ngModel)]="item.dateDebut" dateFormat="{{dateFormat}}"></p-calendar>
+                    </div>
+                    <div class="field col-12 md:col-3">
+                        <label for="7">{{'Date fin estime' | translate}}</label>
+                        <p-calendar id="7" [disabled]="true"  [showTime]="true" [showSeconds]="false" placeholder="{{'Date fin estime' | translate}}"  [(ngModel)]="item.dateFinEstime" dateFormat="{{dateFormat}}"></p-calendar>
+                    </div>
+                    <div class="field col-12 md:col-3">
+                        <label for="8">{{'Date fin' | translate}}</label>
+                        <p-calendar id="8" [disabled]="true"  [showTime]="true" [showSeconds]="false" placeholder="{{'Date fin' | translate}}"  [(ngModel)]="item.dateFin" dateFormat="{{dateFormat}}"></p-calendar>
+                    </div>
+                    <div class="field col-12 md:col-3">
+                        <label for="11">{{'Client' | translate}}</label>
+                        <p-dropdown [options]="clients" [(ngModel)]="item.client" id="11" [disabled]="true" optionLabel="code" placeholder="{{'Client' | translate}}"></p-dropdown>
+                    </div>
+                    <div class="field col-12 md:col-3">
+                        <label for="12">{{'Chef projet' | translate}}</label>
+                        <p-dropdown [options]="chefProjets" [(ngModel)]="item.chefProjet" id="12" [disabled]="true" optionLabel="code" placeholder="{{'Chef projet' | translate}}"></p-dropdown>
+                    </div>
+                </div>
+            </p-tabPanel>
+
+            <p-tabPanel header="projetProjetRessources">
+                <div class="grid">
+                    <div class="col">
+                        <div class="card">
+                            <p-table [value]="item.projetRessources" [scrollable]="true" scrollHeight="200px">
+                                <ng-template pTemplate="header">
+                                    <tr>
+                                        <th>Code</th>
+                                        <th>Ressource</th>
+                                        <th>Prix</th>
+                                        <th>Quantite</th>
+                                    </tr>
+                                </ng-template>
+                                <ng-template pTemplate="body" let-p>
+                                    <tr>
+                                        <td>{{p.code}}</td>
+                                        <td>{{p.ressource?.id}}</td>
+                                        <td>{{p.prix}}</td>
+                                        <td>{{p.quantite}}</td>
+                                    </tr>
+                                </ng-template>
+                            </p-table>
+                        </div>
+                    </div>
+                </div>
+            </p-tabPanel>
+            <p-tabPanel header="projetTaches">
+                <div class="grid">
+                    <div class="col">
+                        <div class="card">
+                            <p-table [value]="item.taches" [scrollable]="true" scrollHeight="200px">
+                                <ng-template pTemplate="header">
+                                    <tr>
+                                        <th>Code</th>
+                                        <th>Nom</th>
+                                        <th>Prenom</th>
+                                        <th>Email</th>
+                                        <th>Tele</th>
+                                        <th>Titre</th>
+                                        <th>Salaire</th>
+                                        <th>Collaborateur</th>
+                                    </tr>
+                                </ng-template>
+                                <ng-template pTemplate="body" let-p>
+                                    <tr>
+                                        <td>{{p.code}}</td>
+                                        <td>{{p.nom}}</td>
+                                        <td>{{p.prenom}}</td>
+                                        <td>{{p.email}}</td>
+                                        <td>{{p.tele}}</td>
+                                        <td>{{p.titre}}</td>
+                                        <td>{{p.salaire}}</td>
+                                        <td>{{p.collaborateur?.code}}</td>
+                                    </tr>
+                                </ng-template>
+                            </p-table>
+                        </div>
+                    </div>
+                </div>
+            </p-tabPanel>
+            <p-tabPanel header="projetRemarques">
+                <div class="grid">
+                    <div class="col">
+                        <div class="card">
+                            <p-table [value]="item.remarques" [scrollable]="true" scrollHeight="200px">
+                                <ng-template pTemplate="header">
+                                    <tr>
+                                        <th>Code</th>
+                                        <th>Libelle</th>
+                                        <th>Date remarque</th>
+                                    </tr>
+                                </ng-template>
+                                <ng-template pTemplate="body" let-p>
+                                    <tr>
+                                        <td>{{p.code}}</td>
+                                        <td>{{p.libelle}}</td>
+                                        <td>{{p.dateRemarque | date: dateFormatColumn}}</td>
+                                    </tr>
+                                </ng-template>
+                            </p-table>
+                        </div>
+                    </div>
+                </div>
+            </p-tabPanel>
+        </p-tabView>
+
+    </ng-template>
+
+    <ng-template pTemplate="footer" >
+        <div class="grid-footer">
+            <div>
+                <button pButton pRipple label="Annuler" icon="pi pi-times" class="p-button-outlined" (click)="hideViewDialog()"></button>
+            </div>
+        </div>
+    </ng-template>
+</p-dialog>
+
+
+

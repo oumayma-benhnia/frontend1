@@ -1,0 +1,36 @@
+
+<p-dialog [(visible)]="viewDialog" [style]="{width: '70vw'}" header="{{'moyenPaiementTabPan' | translate}}" [modal]="true" styleClass="p-fluid">
+    <ng-template pTemplate="content">
+        <p-tabView>
+            <p-tabPanel header="{{'moyenPaiementTabPan' | translate}}">
+                <div class="grid">
+                    <div class="field col-12 md:col-6">
+                        <label for="1">{{'Code' | translate}}</label>
+                        <input class="mb-2 mr-2" type="text" pInputText [disabled]="true" placeholder="{{'Code' | translate}}" autofocus  id="1" [(ngModel)]="item.code">
+                    </div>
+                    <div class="field col-12 md:col-6">
+                        <label for="2">{{'Libelle' | translate}}</label>
+                        <input class="mb-2 mr-2" type="text" pInputText [disabled]="true" placeholder="{{'Libelle' | translate}}" autofocus  id="2" [(ngModel)]="item.libelle">
+                    </div>
+                    <div class="field col-12 md:col-6">
+                        <label for="3">{{'Date remarque' | translate}}</label>
+                        <p-calendar id="3" [disabled]="true"  [showTime]="true" [showSeconds]="false" placeholder="{{'Date remarque' | translate}}"  [(ngModel)]="item.dateRemarque" dateFormat="{{dateFormat}}"></p-calendar>
+                    </div>
+                </div>
+            </p-tabPanel>
+
+        </p-tabView>
+
+    </ng-template>
+
+    <ng-template pTemplate="footer" >
+        <div class="grid-footer">
+            <div>
+                <button pButton pRipple label="Annuler" icon="pi pi-times" class="p-button-outlined" (click)="hideViewDialog()"></button>
+            </div>
+        </div>
+    </ng-template>
+</p-dialog>
+
+
+

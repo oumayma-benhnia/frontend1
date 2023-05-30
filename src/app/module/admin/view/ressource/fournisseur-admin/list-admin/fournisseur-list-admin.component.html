@@ -1,0 +1,179 @@
+<div class="grid">
+    <div class="col-12">
+        <p-toast></p-toast>
+        <div class="card">
+            <p-toolbar styleClass="mb-4">
+                <ng-template pTemplate="left">
+                                        <button pButton pRipple label=" {{'new' | translate}}" icon="pi pi-plus" class="p-button-success mr-2 mb-2" (click)="openCreate('Fournisseur')"></button>
+                    <button [disabled]="isSelectionDisabled()" pButton pRipple label=" {{'delete' | translate}}" icon="pi pi-trash" class="p-button-danger mr-2 mb-2" (click)=deleteMultiple()></button>
+                    <button pButton pRipple label=" {{'search' | translate}}" icon="pi pi-{{findByCriteriaShow?'angle-down':'angle-right'}}" class="p-button-warning mr-2 mb-2" (click)="this.showSearch()"></button>
+                </ng-template>
+                <ng-template pTemplate="right">
+                    <div class="flex">
+                        <p-splitButton label=" {{'export' | translate}}" icon="pi pi-download" styleClass="p-button-help" [model]="excelPdfButons"></p-splitButton>
+                    </div>
+                </ng-template>
+
+            </p-toolbar>
+            <p-toolbar *ngIf="findByCriteriaShow">
+
+                <div class="align-form-search">
+                        <span class=" p-float-label mr-3 align-search-items mt-4">
+                            <input class="mr-2" pInputText id="1" type="text"  [(ngModel)]="criteria.codeLike">
+                            <label for="1">{{'Code' | translate}}</label>
+                        </span>
+                        <span class=" p-float-label mr-3 align-search-items mt-4">
+                            <input class="mr-2" pInputText id="2" type="text"  [(ngModel)]="criteria.nomLike">
+                            <label for="2">{{'Nom' | translate}}</label>
+                        </span>
+                        <span class=" p-float-label mr-3 align-search-items mt-4">
+                            <input class="mr-2" pInputText id="3" type="text"  [(ngModel)]="criteria.prenomLike">
+                            <label for="3">{{'Prenom' | translate}}</label>
+                        </span>
+                        <span class=" p-float-label mr-3 align-search-items mt-4">
+                            <input class="mr-2" pInputText id="4" type="text"  [(ngModel)]="criteria.emailLike">
+                            <label for="4">{{'Email' | translate}}</label>
+                        </span>
+                        <span class=" p-float-label mr-3 align-search-items mt-4">
+                            <input class="mr-2" pInputText id="5" type="text"  [(ngModel)]="criteria.teleLike">
+                            <label for="5">{{'Tele' | translate}}</label>
+                        </span>
+                        <span class=" p-float-label mr-3 align-search-items mt-4">
+                            <input class="mr-2" pInputText id="6" type="text"  [(ngModel)]="criteria.societeLike">
+                            <label for="6">{{'Societe' | translate}}</label>
+                        </span>
+                        <span class=" p-float-label mr-3 align-search-items mt-4">
+                            <input class="mr-2" pInputText id="7" type="text"  [(ngModel)]="criteria.adresseLike">
+                            <label for="7">{{'Adresse' | translate}}</label>
+                        </span>
+                </div>
+
+                <div class="align-search-button">
+                    <button pButton pRipple label="{{'validate' | translate}}" icon="pi pi-sort-amount-down" class="p-button-info mr-2" (click)="findPaginatedByCriteria()"></button>
+                </div>
+            </p-toolbar>
+
+
+            <p-table #dt [value]="items" [columns]="cols" [rows]="8" [paginator]="false"
+                    [globalFilterFields]="['code', 'nom', 'prenom', 'email', 'tele', 'societe']" [(selection)]="selections"
+                    [rowHover]="true" dataKey="id" styleClass="p-datatable-customers"
+                    currentPageReportTemplate="{{'Les éléments de {first} à {last} sur {totalRecords} ' | translate}}"
+                    [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50]" selectionMode="multiple">
+                <ng-template pTemplate="caption">
+                    <div class="flex flex-column flex-row justify-content-between table-header">
+                        <h5 class="p-m-0">{{'fournisseurHeader' | translate}}</h5>
+                        <span class="p-input-icon-left ml-auto">
+                            <i class="pi pi-search"></i>
+                            <input pInputText type="text" placeholder="{{'searchInput' | translate}}" (input)="dt.filterGlobal($event.target.value, 'contains')"/>
+                        </span>
+                    </div>
+                </ng-template>
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th style="width: 3rem">
+                            <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                        </th>
+                                
+                        <th pSortableColumn="code">
+                            <div class="p-d-flex p-jc-between p-ai-center">
+                                <span>{{'Code' | translate}}</span>
+                                <p-sortIcon field="code"></p-sortIcon>
+                                <p-columnFilter type="text" field="element.code" display="menu" class="ml-auto"></p-columnFilter>
+                            </div>
+                        </th>
+                                
+                                
+                        <th pSortableColumn="nom">
+                            <div class="p-d-flex p-jc-between p-ai-center">
+                                <span>{{'Nom' | translate}}</span>
+                                <p-sortIcon field="nom"></p-sortIcon>
+                                <p-columnFilter type="text" field="element.nom" display="menu" class="ml-auto"></p-columnFilter>
+                            </div>
+                        </th>
+                                
+                                
+                        <th pSortableColumn="prenom">
+                            <div class="p-d-flex p-jc-between p-ai-center">
+                                <span>{{'Prenom' | translate}}</span>
+                                <p-sortIcon field="prenom"></p-sortIcon>
+                                <p-columnFilter type="text" field="element.prenom" display="menu" class="ml-auto"></p-columnFilter>
+                            </div>
+                        </th>
+                                
+                                
+                        <th pSortableColumn="email">
+                            <div class="p-d-flex p-jc-between p-ai-center">
+                                <span>{{'Email' | translate}}</span>
+                                <p-sortIcon field="email"></p-sortIcon>
+                                <p-columnFilter type="text" field="element.email" display="menu" class="ml-auto"></p-columnFilter>
+                            </div>
+                        </th>
+                                
+                                
+                        <th pSortableColumn="tele">
+                            <div class="p-d-flex p-jc-between p-ai-center">
+                                <span>{{'Tele' | translate}}</span>
+                                <p-sortIcon field="tele"></p-sortIcon>
+                                <p-columnFilter type="text" field="element.tele" display="menu" class="ml-auto"></p-columnFilter>
+                            </div>
+                        </th>
+                                
+                                
+                        <th pSortableColumn="societe">
+                            <div class="p-d-flex p-jc-between p-ai-center">
+                                <span>{{'Societe' | translate}}</span>
+                                <p-sortIcon field="societe"></p-sortIcon>
+                                <p-columnFilter type="text" field="element.societe" display="menu" class="ml-auto"></p-columnFilter>
+                            </div>
+                        </th>
+                                
+                        <th>Actions</th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-element>
+                    <tr>
+                        <td>
+                            <p-tableCheckbox [value]="element"></p-tableCheckbox>
+                        </td>
+                            
+                        <td>{{element.code}}</td>
+                            
+                            
+                        <td>{{element.nom}}</td>
+                            
+                            
+                        <td>{{element.prenom}}</td>
+                            
+                            
+                        <td>{{element.email}}</td>
+                            
+                            
+                        <td>{{element.tele}}</td>
+                            
+                            
+                        <td>{{element.societe}}</td>
+                            
+                        <td>
+                            <button pButton pRipple icon="pi pi-pencil"  class="p-button-rounded p-button-success mr-2" (click)="edit(element)"></button>
+                            <button pButton pRipple icon="pi pi-list" class="p-button-rounded p-button-info mr-2" (click)="view(element)"></button>
+                            <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-danger mr-2" (click)="delete(element)"></button>
+                            <button pButton pRipple icon="pi pi-copy" class="p-button-rounded p-button-raised p-button-warning" (click)="duplicate(element)"></button>
+                        </td>
+                    </tr>
+                </ng-template>
+
+                <ng-template pTemplate="summary">
+                    <p-paginator  [rows]="10" [totalRecords]="totalRecords" (onPageChange)="onPage($event)"></p-paginator>
+                    <div class="p-d-flex p-ai-center p-jc-between">
+                        En totale il {{items ? totalRecords == 1 ? 'y a' : 'y a' : 'y a' }} {{items ? totalRecords : 0 }} {{items ? totalRecords == 1 ? 'fournisseur' : 'fournisseurs' : 0 }}.
+                    </div>
+                </ng-template>
+            </p-table>
+        </div>
+
+        <app-fournisseur-create-admin></app-fournisseur-create-admin>
+        <app-fournisseur-edit-admin></app-fournisseur-edit-admin>
+        <app-fournisseur-view-admin></app-fournisseur-view-admin>
+        <p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>
+    </div>
+</div>

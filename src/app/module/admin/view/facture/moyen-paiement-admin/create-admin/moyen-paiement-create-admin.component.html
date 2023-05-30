@@ -1,0 +1,54 @@
+        <p-dialog [(visible)]="createDialog" [style]="{width: '70vw'}" header="{{'moyenPaiementTabPan' | translate}}" [modal]="true" styleClass="p-fluid" [maximizable]="true" [draggable]="false" [resizable]="false">
+            <ng-template pTemplate="content" >
+                        <p-tabView>
+                            <p-tabPanel header="{{'moyenPaiementTabPan' | translate}}">
+                                <div class="grid">
+
+                                                <div class="field col-12 md:col-6">
+                                                    <label for="1">{{'moyenPaiementCode' | translate}}<span style="color: red;">*</span></label>
+                                                    <input class="mb-2 mr-2" type="text" pInputText  placeholder="{{'moyenPaiementCode' | translate}}" id="1" [(ngModel)]="item.code"
+                                                            [ngClass]="{'ng-invalid ng-dirty' : !validMoyenPaiementCode}"  />
+                                                    <small class='p-error' *ngIf='!validMoyenPaiementCode'>Code est obligatoire.</small>
+                                                </div>
+
+
+
+                                                <div class="field col-12 md:col-6">
+                                                    <label for="2">{{'moyenPaiementLibelle' | translate}}</label>
+                                                    <input class="mb-2 mr-2" type="text" pInputText  placeholder="{{'moyenPaiementLibelle' | translate}}" id="2" [(ngModel)]="item.libelle"
+                                                             />
+                                                    
+                                                </div>
+
+
+
+                                                <div class="field col-12 md:col-6">
+                                                    <label for="3">{{'moyenPaiementDateRemarque' | translate}}</label>
+                                                    <p-calendar appendTo="body" id="3"  [showTime]="true" [showSeconds]="false" placeholder="{{'moyenPaiementDateRemarque' | translate}}"  [(ngModel)]="item.dateRemarque"
+                                                            dateFormat="{{dateFormat}}"  >
+                                                    </p-calendar>
+                                                    
+                                                </div>
+
+                                </div>
+                            </p-tabPanel>
+
+                        </p-tabView>
+
+            </ng-template>
+
+            <ng-template pTemplate="footer" >
+                <div class="grid-step">
+                        <div style="margin-left: auto;">
+                            <button pButton pRipple  label="{{'validate' | translate}}"  icon="pi pi-check" style="margin:10px" (click)="save()"></button>
+                        </div>
+                        <div>
+                            <button pButton pRipple  label="{{'cancel' | translate}}" icon="pi pi-times" class="p-button-outlined" (click)="hideCreateDialog()"></button>
+                        </div>
+
+                </div>
+            </ng-template>
+
+
+
+    </p-dialog>

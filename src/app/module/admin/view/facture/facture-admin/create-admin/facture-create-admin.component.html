@@ -1,0 +1,88 @@
+        <p-dialog [(visible)]="createDialog" [style]="{width: '70vw'}" header="{{'factureTabPan' | translate}}" [modal]="true" styleClass="p-fluid" [maximizable]="true" [draggable]="false" [resizable]="false">
+            <ng-template pTemplate="content" >
+                        <p-tabView>
+                            <p-tabPanel header="{{'factureTabPan' | translate}}">
+                                <div class="grid">
+
+                                                <div class="field col-12 md:col-4">
+                                                    <label for="1">{{'factureReference' | translate}}<span style="color: red;">*</span></label>
+                                                    <input class="mb-2 mr-2" type="text" pInputText  placeholder="{{'factureReference' | translate}}" id="1" [(ngModel)]="item.reference"
+                                                            [ngClass]="{'ng-invalid ng-dirty' : !validFactureReference}"  />
+                                                    <small class='p-error' *ngIf='!validFactureReference'>Reference est obligatoire.</small>
+                                                </div>
+
+
+
+                                                <div class="field col-12 md:col-4">
+                                                    <label for="2">{{'factureLibelle' | translate}}<span style="color: red;">*</span></label>
+                                                    <input class="mb-2 mr-2" type="text" pInputText  placeholder="{{'factureLibelle' | translate}}" id="2" [(ngModel)]="item.libelle"
+                                                            [ngClass]="{'ng-invalid ng-dirty' : !validFactureLibelle}"  />
+                                                    <small class='p-error' *ngIf='!validFactureLibelle'>Libelle est obligatoire.</small>
+                                                </div>
+
+
+
+                                                <div class="field col-12 md:col-4">
+                                                    <label for="3">{{'factureMontant' | translate}}</label>
+                                                    <p-inputNumber class="mb-2 mr-2" id="3" placeholder="{{'factureMontant' | translate}}" [(ngModel)]="item.montant"  >
+                                                    </p-inputNumber>
+                                                    
+                                                </div>
+
+                                                <div class="field col-12 md:col-4">
+                                                    <label for="4">{{'factureDateEmission' | translate}}</label>
+                                                    <p-calendar appendTo="body" id="4"  [showTime]="true" [showSeconds]="false" placeholder="{{'factureDateEmission' | translate}}"  [(ngModel)]="item.dateEmission"
+                                                            dateFormat="{{dateFormat}}"  >
+                                                    </p-calendar>
+                                                    
+                                                </div>
+
+                                                <div class="field col-12 md:col-4">
+                                                    <label for="5">{{'factureDateEcheance' | translate}}</label>
+                                                    <p-calendar appendTo="body" id="5"  [showTime]="true" [showSeconds]="false" placeholder="{{'factureDateEcheance' | translate}}"  [(ngModel)]="item.dateEcheance"
+                                                            dateFormat="{{dateFormat}}"  >
+                                                    </p-calendar>
+                                                    
+                                                </div>
+
+                                            <div class="field col-11 md:col-3">
+                                                <label for="6">{{'factureComptable' | translate}}</label>
+                                                <p-dropdown  appendTo="body"  [options]="comptables" [(ngModel)]="item.comptable" id="6" [filter]="true" filterMatchMode="contains"
+                                                        [showClear]="true" optionLabel="code" placeholder="{{'factureComptable' | translate}}"  >
+                                                </p-dropdown>
+                                                
+                                            </div>
+                                                <div class="col-1">
+                                                    <label></label>
+                                                    <button pButton pRipple type="button" icon="pi pi-plus" (click)="openCreateComptable('Comptable')" class="p-button-success one-colonne-btn-success-align"></button>
+                                                </div>
+                                            <div class="field col-11 md:col-3">
+                                                <label for="7">{{'factureProjet' | translate}}</label>
+                                                <p-dropdown  appendTo="body"  [options]="projets" [(ngModel)]="item.projet" id="7" [filter]="true" filterMatchMode="contains"
+                                                        [showClear]="true" optionLabel="code" placeholder="{{'factureProjet' | translate}}"  >
+                                                </p-dropdown>
+                                                
+                                            </div>
+                                </div>
+                            </p-tabPanel>
+
+                        </p-tabView>
+
+            </ng-template>
+
+            <ng-template pTemplate="footer" >
+                <div class="grid-step">
+                        <div style="margin-left: auto;">
+                            <button pButton pRipple  label="{{'validate' | translate}}"  icon="pi pi-check" style="margin:10px" (click)="save()"></button>
+                        </div>
+                        <div>
+                            <button pButton pRipple  label="{{'cancel' | translate}}" icon="pi pi-times" class="p-button-outlined" (click)="hideCreateDialog()"></button>
+                        </div>
+
+                </div>
+            </ng-template>
+
+            <app-comptable-create-admin></app-comptable-create-admin>
+
+
+    </p-dialog>

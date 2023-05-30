@@ -1,0 +1,72 @@
+        <p-dialog [(visible)]="createDialog" [style]="{width: '70vw'}" header="{{'projetRessourceTabPan' | translate}}" [modal]="true" styleClass="p-fluid" [maximizable]="true" [draggable]="false" [resizable]="false">
+            <ng-template pTemplate="content" >
+                        <p-tabView>
+                            <p-tabPanel header="{{'projetRessourceTabPan' | translate}}">
+                                <div class="grid">
+
+                                                <div class="field col-12 md:col-6">
+                                                    <label for="1">{{'projetRessourceCode' | translate}}<span style="color: red;">*</span></label>
+                                                    <input class="mb-2 mr-2" type="text" pInputText  placeholder="{{'projetRessourceCode' | translate}}" id="1" [(ngModel)]="item.code"
+                                                            [ngClass]="{'ng-invalid ng-dirty' : !validProjetRessourceCode}"  />
+                                                    <small class='p-error' *ngIf='!validProjetRessourceCode'>Code est obligatoire.</small>
+                                                </div>
+
+
+
+                                            <div class="field col-11 md:col-5">
+                                                <label for="2">{{'projetRessourceRessource' | translate}}</label>
+                                                <p-dropdown  appendTo="body"  [options]="ressources" [(ngModel)]="item.ressource" id="2" [filter]="true" filterMatchMode="contains"
+                                                        [showClear]="true" optionLabel="id" placeholder="{{'projetRessourceRessource' | translate}}"  >
+                                                </p-dropdown>
+                                                
+                                            </div>
+                                                <div class="col-1">
+                                                    <label></label>
+                                                    <button pButton pRipple type="button" icon="pi pi-plus" (click)="openCreateRessource('Ressource')" class="p-button-success one-colonne-btn-success-align"></button>
+                                                </div>
+                                                <div class="field col-12 md:col-6">
+                                                    <label for="3">{{'projetRessourcePrix' | translate}}</label>
+                                                    <p-inputNumber class="mb-2 mr-2" id="3" placeholder="{{'projetRessourcePrix' | translate}}" [(ngModel)]="item.prix"  >
+                                                    </p-inputNumber>
+                                                    
+                                                </div>
+
+                                                <div class="field col-12 md:col-6">
+                                                    <label for="4">{{'projetRessourceQuantite' | translate}}</label>
+                                                    <input class="mb-2 mr-2" type="text" pInputText  placeholder="{{'projetRessourceQuantite' | translate}}" id="4" [(ngModel)]="item.quantite"
+                                                             />
+                                                    
+                                                </div>
+
+
+
+                                            <div class="field col-11 md:col-5">
+                                                <label for="5">{{'projetRessourceProjet' | translate}}</label>
+                                                <p-dropdown  appendTo="body"  [options]="projets" [(ngModel)]="item.projet" id="5" [filter]="true" filterMatchMode="contains"
+                                                        [showClear]="true" optionLabel="code" placeholder="{{'projetRessourceProjet' | translate}}"  >
+                                                </p-dropdown>
+                                                
+                                            </div>
+                                </div>
+                            </p-tabPanel>
+
+                        </p-tabView>
+
+            </ng-template>
+
+            <ng-template pTemplate="footer" >
+                <div class="grid-step">
+                        <div style="margin-left: auto;">
+                            <button pButton pRipple  label="{{'validate' | translate}}"  icon="pi pi-check" style="margin:10px" (click)="save()"></button>
+                        </div>
+                        <div>
+                            <button pButton pRipple  label="{{'cancel' | translate}}" icon="pi pi-times" class="p-button-outlined" (click)="hideCreateDialog()"></button>
+                        </div>
+
+                </div>
+            </ng-template>
+
+            <app-ressource-create-admin></app-ressource-create-admin>
+
+
+    </p-dialog>

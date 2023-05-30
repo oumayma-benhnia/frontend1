@@ -1,0 +1,64 @@
+        <p-dialog [(visible)]="createDialog" [style]="{width: '70vw'}" header="{{'remarqueTabPan' | translate}}" [modal]="true" styleClass="p-fluid" [maximizable]="true" [draggable]="false" [resizable]="false">
+            <ng-template pTemplate="content" >
+                        <p-tabView>
+                            <p-tabPanel header="{{'remarqueTabPan' | translate}}">
+                                <div class="grid">
+
+                                                <div class="field col-12 md:col-6">
+                                                    <label for="1">{{'remarqueCode' | translate}}<span style="color: red;">*</span></label>
+                                                    <input class="mb-2 mr-2" type="text" pInputText  placeholder="{{'remarqueCode' | translate}}" id="1" [(ngModel)]="item.code"
+                                                            [ngClass]="{'ng-invalid ng-dirty' : !validRemarqueCode}"  />
+                                                    <small class='p-error' *ngIf='!validRemarqueCode'>Code est obligatoire.</small>
+                                                </div>
+
+
+
+                                                <div class="field col-12 md:col-6">
+                                                    <label for="2">{{'remarqueLibelle' | translate}}</label>
+                                                    <textarea id="2" pInputTextarea rows="5" cols="30" placeholder="{{'remarqueLibelle' | translate}}"  [(ngModel)]="item.libelle"
+                                                             ></textarea>
+                                                    
+                                                </div>
+
+                                                <div class="field col-12 md:col-6">
+                                                    <label for="3">{{'remarqueDateRemarque' | translate}}</label>
+                                                    <p-calendar appendTo="body" id="3"  [showTime]="true" [showSeconds]="false" placeholder="{{'remarqueDateRemarque' | translate}}"  [(ngModel)]="item.dateRemarque"
+                                                            dateFormat="{{dateFormat}}"  >
+                                                    </p-calendar>
+                                                    
+                                                </div>
+
+                                            <div class="field col-11 md:col-5">
+                                                <label for="4">{{'remarqueProjet' | translate}}</label>
+                                                <p-dropdown  appendTo="body"  [options]="projets" [(ngModel)]="item.projet" id="4" [filter]="true" filterMatchMode="contains"
+                                                        [showClear]="true" optionLabel="code" placeholder="{{'remarqueProjet' | translate}}"  >
+                                                </p-dropdown>
+                                                
+                                            </div>
+                                                <div class="col-1">
+                                                    <label></label>
+                                                    <button pButton pRipple type="button" icon="pi pi-plus" (click)="openCreateProjet('Projet')" class="p-button-success one-colonne-btn-success-align"></button>
+                                                </div>
+                                </div>
+                            </p-tabPanel>
+
+                        </p-tabView>
+
+            </ng-template>
+
+            <ng-template pTemplate="footer" >
+                <div class="grid-step">
+                        <div style="margin-left: auto;">
+                            <button pButton pRipple  label="{{'validate' | translate}}"  icon="pi pi-check" style="margin:10px" (click)="save()"></button>
+                        </div>
+                        <div>
+                            <button pButton pRipple  label="{{'cancel' | translate}}" icon="pi pi-times" class="p-button-outlined" (click)="hideCreateDialog()"></button>
+                        </div>
+
+                </div>
+            </ng-template>
+
+            <app-projet-create-admin></app-projet-create-admin>
+
+
+    </p-dialog>

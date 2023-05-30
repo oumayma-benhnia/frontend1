@@ -1,0 +1,75 @@
+        <p-dialog [(visible)]="editDialog" [style]="{width: '70vw'}" header="{{'fournisseurTabPan' | translate}}" [modal]="true" styleClass="p-fluid" [maximizable]="true" [draggable]="false" [resizable]="false">
+            <ng-template pTemplate="content" >
+                <p-tabView>
+                    <p-tabPanel header="{{'fournisseurTabPan' | translate}}">
+                        <div class="grid">
+
+
+                                        <div class="field col-12 md:col-4">
+                                            <label for="1">{{'fournisseurCode' | translate}}<span style="color: red;">*</span></label>
+                                            <input   appendTo="body" class="mb-2 mr-2" type="text" pInputText placeholder="{{'fournisseurCode' | translate}}" id="1" [(ngModel)]="item.code"
+                                                    [ngClass]="{'ng-invalid ng-dirty' : !validFournisseurCode}"  />
+                                            <small class='p-error' *ngIf='!validFournisseurCode'>Code est obligatoire.</small>
+                                        </div>
+
+                                        <div class="field col-12 md:col-4">
+                                            <label for="2">{{'fournisseurNom' | translate}}</label>
+                                            <input   appendTo="body" class="mb-2 mr-2" type="text" pInputText placeholder="{{'fournisseurNom' | translate}}" id="2" [(ngModel)]="item.nom"
+                                                     />
+                                            
+                                        </div>
+
+                                        <div class="field col-12 md:col-4">
+                                            <label for="3">{{'fournisseurPrenom' | translate}}</label>
+                                            <input   appendTo="body" class="mb-2 mr-2" type="text" pInputText placeholder="{{'fournisseurPrenom' | translate}}" id="3" [(ngModel)]="item.prenom"
+                                                     />
+                                            
+                                        </div>
+
+                                        <div class="field col-12 md:col-4">
+                                            <label for="4">{{'fournisseurEmail' | translate}}</label>
+                                            <input   appendTo="body" class="mb-2 mr-2" type="text" pInputText placeholder="{{'fournisseurEmail' | translate}}" id="4" [(ngModel)]="item.email"
+                                                     />
+                                            
+                                        </div>
+
+                                        <div class="field col-12 md:col-4">
+                                            <label for="5">{{'fournisseurTele' | translate}}</label>
+                                            <input   appendTo="body" class="mb-2 mr-2" type="text" pInputText placeholder="{{'fournisseurTele' | translate}}" id="5" [(ngModel)]="item.tele"
+                                                     />
+                                            
+                                        </div>
+
+                                        <div class="field col-12 md:col-4">
+                                            <label for="6">{{'fournisseurSociete' | translate}}</label>
+                                            <input   appendTo="body" class="mb-2 mr-2" type="text" pInputText placeholder="{{'fournisseurSociete' | translate}}" id="6" [(ngModel)]="item.societe"
+                                                     />
+                                            
+                                        </div>
+
+                                        <div class="field col-12 md:col-4">
+                                            <label for="7">{{'fournisseurAdresse' | translate}}</label>
+                                            <textarea appendTo="body" id="7" pInputTextarea rows="5" cols="30" placeholder="{{'fournisseurAdresse' | translate}}"  [(ngModel)]="item.adresse"
+                                                     ></textarea>
+                                            
+                                        </div>
+                        </div>
+                    </p-tabPanel>
+
+                </p-tabView>
+            </ng-template>
+
+            <ng-template pTemplate="footer" >
+                <div class="grid-footer">
+                        <div>
+                            <button pButton pRipple label="Annuler" icon="pi pi-times" class="p-button-outlined" (click)="hideEditDialog()"></button>
+                        </div>
+                    <div>
+                        <button pButton pRipple label="Valider" icon="pi pi-check" style="margin:10px" (click)="edit()"></button>
+                    </div>
+                </div>
+            </ng-template>
+
+
+
+    </p-dialog>

@@ -1,0 +1,341 @@
+        <p-dialog [(visible)]="createDialog" [style]="{width: '70vw'}" header="{{'projetTabPan' | translate}}" [modal]="true" styleClass="p-fluid" [maximizable]="true" [draggable]="false" [resizable]="false">
+            <ng-template pTemplate="content" >
+                        <p-tabView>
+                            <p-tabPanel header="{{'projetTabPan' | translate}}">
+                                <div class="grid">
+
+                                                <div class="field col-12 md:col-3">
+                                                    <label for="1">{{'projetCode' | translate}}<span style="color: red;">*</span></label>
+                                                    <input class="mb-2 mr-2" type="text" pInputText  placeholder="{{'projetCode' | translate}}" id="1" [(ngModel)]="item.code"
+                                                            [ngClass]="{'ng-invalid ng-dirty' : !validProjetCode}"  />
+                                                    <small class='p-error' *ngIf='!validProjetCode'>Code est obligatoire.</small>
+                                                </div>
+
+
+
+                                                <div class="field col-12 md:col-3">
+                                                    <label for="2">{{'projetLibelle' | translate}}</label>
+                                                    <input class="mb-2 mr-2" type="text" pInputText  placeholder="{{'projetLibelle' | translate}}" id="2" [(ngModel)]="item.libelle"
+                                                             />
+                                                    
+                                                </div>
+
+
+
+                                            <div class="field col-11 md:col-2">
+                                                <label for="3">{{'projetTypeProjet' | translate}}</label>
+                                                <p-dropdown  appendTo="body"  [options]="typeProjets" [(ngModel)]="item.typeProjet" id="3" [filter]="true" filterMatchMode="contains"
+                                                        [showClear]="true" optionLabel="libelle" placeholder="{{'projetTypeProjet' | translate}}"  >
+                                                </p-dropdown>
+                                                
+                                            </div>
+                                                <div class="col-1">
+                                                    <label></label>
+                                                    <button pButton pRipple type="button" icon="pi pi-plus" (click)="openCreateTypeProjet('TypeProjet')" class="p-button-success one-colonne-btn-success-align"></button>
+                                                </div>
+                                                <div class="field col-12 md:col-3">
+                                                    <label for="4">{{'projetBudget' | translate}}</label>
+                                                    <p-inputNumber class="mb-2 mr-2" id="4" placeholder="{{'projetBudget' | translate}}" [(ngModel)]="item.budget"  >
+                                                    </p-inputNumber>
+                                                    
+                                                </div>
+
+                                                <div class="field col-12 md:col-3">
+                                                    <label for="5">{{'projetProgression' | translate}}</label>
+                                                    <textarea id="5" pInputTextarea rows="5" cols="30" placeholder="{{'projetProgression' | translate}}"  [(ngModel)]="item.progression"
+                                                             ></textarea>
+                                                    
+                                                </div>
+
+                                                <div class="field col-12 md:col-3">
+                                                    <label for="6">{{'projetDateDebut' | translate}}</label>
+                                                    <p-calendar appendTo="body" id="6"  [showTime]="true" [showSeconds]="false" placeholder="{{'projetDateDebut' | translate}}"  [(ngModel)]="item.dateDebut"
+                                                            dateFormat="{{dateFormat}}"  >
+                                                    </p-calendar>
+                                                    
+                                                </div>
+
+                                                <div class="field col-12 md:col-3">
+                                                    <label for="7">{{'projetDateFinEstime' | translate}}</label>
+                                                    <p-calendar appendTo="body" id="7"  [showTime]="true" [showSeconds]="false" placeholder="{{'projetDateFinEstime' | translate}}"  [(ngModel)]="item.dateFinEstime"
+                                                            dateFormat="{{dateFormat}}"  >
+                                                    </p-calendar>
+                                                    
+                                                </div>
+
+                                                <div class="field col-12 md:col-3">
+                                                    <label for="8">{{'projetDateFin' | translate}}</label>
+                                                    <p-calendar appendTo="body" id="8"  [showTime]="true" [showSeconds]="false" placeholder="{{'projetDateFin' | translate}}"  [(ngModel)]="item.dateFin"
+                                                            dateFormat="{{dateFormat}}"  >
+                                                    </p-calendar>
+                                                    
+                                                </div>
+
+                                            <div class="field col-11 md:col-2">
+                                                <label for="11">{{'projetClient' | translate}}</label>
+                                                <p-dropdown  appendTo="body"  [options]="clients" [(ngModel)]="item.client" id="11" [filter]="true" filterMatchMode="contains"
+                                                        [showClear]="true" optionLabel="code" placeholder="{{'projetClient' | translate}}"  >
+                                                </p-dropdown>
+                                                
+                                            </div>
+                                                <div class="col-1">
+                                                    <label></label>
+                                                    <button pButton pRipple type="button" icon="pi pi-plus" (click)="openCreateClient('Client')" class="p-button-success one-colonne-btn-success-align"></button>
+                                                </div>
+                                            <div class="field col-11 md:col-2">
+                                                <label for="12">{{'projetChefProjet' | translate}}</label>
+                                                <p-dropdown  appendTo="body"  [options]="chefProjets" [(ngModel)]="item.chefProjet" id="12" [filter]="true" filterMatchMode="contains"
+                                                        [showClear]="true" optionLabel="code" placeholder="{{'projetChefProjet' | translate}}"  >
+                                                </p-dropdown>
+                                                
+                                            </div>
+                                                <div class="col-1">
+                                                    <label></label>
+                                                    <button pButton pRipple type="button" icon="pi pi-plus" (click)="openCreateChefProjet('ChefProjet')" class="p-button-success one-colonne-btn-success-align"></button>
+                                                </div>
+                                </div>
+                            </p-tabPanel>
+                                    <p-tabPanel header="projetProjetRessources">
+                                        <p-tabView [(activeIndex)]="activeTab">
+                                            <p-tabPanel header="Création">
+                                                    <div class="grid">
+                                                                    <div class="field col-12 md:col-4">
+                                                                        <label for="1">Code<span style="color: red;">*</span></label>
+                                                                        <input class="mb-2 mr-2" type="text" pInputText placeholder="Code"
+                                                                               id="1" [(ngModel)]="projetRessourcesElement.code" autofocus  [ngClass]="{'ng-invalid ng-dirty' : !validProjetRessourcesCode}"  >
+                                                                        <small class='p-error' *ngIf='!validProjetRessourcesCode'>Code est obligatoire.</small>
+                                                                    </div>
+                                                                    <div class="field col-11 md:col-3">
+                                                                        <label>Ressource</label>
+                                                                        <p-dropdown  appendTo="body"  [options]="ressources" [(ngModel)]="projetRessourcesElement.ressource"
+                                                                                     id="2"  [filter]="true" filterMatchMode="contains" [showClear]="true" optionLabel="id"
+                                                                                     placeholder="Ressource"  >
+                                                                        </p-dropdown>
+                                                                        
+                                                                    </div>
+                                                                    <div class="field col-12 md:col-4">
+                                                                        <label for="3">Prix</label>
+                                                                        <p-inputNumber class="mb-2 mr-2" id="prix" placeholder="Prix"  [(ngModel)]="projetRessourcesElement.prix"></p-inputNumber>
+                                                                        
+                                                                    </div>
+                                                                    <div class="field col-12 md:col-4">
+                                                                        <label for="4">Quantite</label>
+                                                                        <input class="mb-2 mr-2" type="text" pInputText placeholder="Quantite"
+                                                                               id="4" [(ngModel)]="projetRessourcesElement.quantite" autofocus   >
+                                                                        
+                                                                    </div>
+                                                        <div class="field col-12 md:col-1">
+                                                            <button pButton pRipple type="button" icon="pi pi-plus" class="mt-4" label="OK" (click)="addProjetRessources()"></button>
+                                                        </div>
+
+                                                    </div>
+                                            </p-tabPanel>
+                                            <p-tabPanel header="Liste {{item.projetRessources?.length > 0 ? '(' + item.projetRessources?.length + ')' : ''}}">
+                                                    <div class="card">
+                                                        <p-table [value]="item.projetRessources" [scrollable]="true" scrollHeight="200px">
+                                                            <ng-template pTemplate="header">
+                                                                <tr>
+                                                                                <th>Code</th>
+                                                                                <th>Ressource</th>
+                                                                                <th>Prix</th>
+                                                                                <th>Quantite</th>
+                                                                    <th>Actions</th>
+                                                                </tr>
+                                                            </ng-template>
+                                                            <ng-template pTemplate="body" let-p>
+                                                                <tr>
+                                                                                <td>{{p.code}}</td>
+                                                                            <td>{{p.ressource?.id}}</td>
+                                                                                <td>{{p.prix}}</td>
+                                                                                <td>{{p.quantite}}</td>
+                                                                    <td>
+                                                                        <button (click)="deleteProjetRessource(p)" pButton type="button" icon="pi pi-times"  class="p-button-rounded p-button-danger"></button>
+                                                                        <button (click)="editProjetRessource(p)" pButton type="button" icon="pi pi-pencil" class="p-button-rounded p-button-success mr-2"></button>
+                                                                    </td>
+                                                                </tr>
+                                                            </ng-template>
+                                                        </p-table>
+                                                    </div>
+
+                                            </p-tabPanel>
+                                        </p-tabView>
+                                    </p-tabPanel>
+
+                                    <p-tabPanel header="projetTaches">
+                                        <p-tabView [(activeIndex)]="activeTab">
+                                            <p-tabPanel header="Création">
+                                                    <div class="grid">
+                                                                    <div class="field col-12 md:col-4">
+                                                                        <label for="1">Code<span style="color: red;">*</span></label>
+                                                                        <input class="mb-2 mr-2" type="text" pInputText placeholder="Code"
+                                                                               id="1" [(ngModel)]="tachesElement.code" autofocus  [ngClass]="{'ng-invalid ng-dirty' : !validTachesCode}"  >
+                                                                        <small class='p-error' *ngIf='!validTachesCode'>Code est obligatoire.</small>
+                                                                    </div>
+                                                                    <div class="field col-12 md:col-4">
+                                                                        <label for="2">Nom</label>
+                                                                        <input class="mb-2 mr-2" type="text" pInputText placeholder="Nom"
+                                                                               id="2" [(ngModel)]="tachesElement.nom" autofocus   >
+                                                                        
+                                                                    </div>
+                                                                    <div class="field col-12 md:col-4">
+                                                                        <label for="3">Prenom</label>
+                                                                        <input class="mb-2 mr-2" type="text" pInputText placeholder="Prenom"
+                                                                               id="3" [(ngModel)]="tachesElement.prenom" autofocus   >
+                                                                        
+                                                                    </div>
+                                                                    <div class="field col-12 md:col-4">
+                                                                        <label for="4">Email</label>
+                                                                        <input class="mb-2 mr-2" type="text" pInputText placeholder="Email"
+                                                                               id="4" [(ngModel)]="tachesElement.email" autofocus   >
+                                                                        
+                                                                    </div>
+                                                                    <div class="field col-12 md:col-4">
+                                                                        <label for="5">Tele</label>
+                                                                        <input class="mb-2 mr-2" type="text" pInputText placeholder="Tele"
+                                                                               id="5" [(ngModel)]="tachesElement.tele" autofocus   >
+                                                                        
+                                                                    </div>
+                                                                    <div class="field col-12 md:col-4">
+                                                                        <label for="6">Titre</label>
+                                                                        <input class="mb-2 mr-2" type="text" pInputText placeholder="Titre"
+                                                                               id="6" [(ngModel)]="tachesElement.titre" autofocus   >
+                                                                        
+                                                                    </div>
+                                                                    <div class="field col-12 md:col-4">
+                                                                        <label for="7">Salaire</label>
+                                                                        <p-inputNumber class="mb-2 mr-2" id="salaire" placeholder="Salaire"  [(ngModel)]="tachesElement.salaire"></p-inputNumber>
+                                                                        
+                                                                    </div>
+                                                                    <div class="field col-11 md:col-3">
+                                                                        <label>Collaborateur</label>
+                                                                        <p-dropdown  appendTo="body"  [options]="collaborateurs" [(ngModel)]="tachesElement.collaborateur"
+                                                                                     id="8"  [filter]="true" filterMatchMode="contains" [showClear]="true" optionLabel="code"
+                                                                                     placeholder="Collaborateur"  >
+                                                                        </p-dropdown>
+                                                                        
+                                                                    </div>
+                                                        <div class="field col-12 md:col-1">
+                                                            <button pButton pRipple type="button" icon="pi pi-plus" class="mt-4" label="OK" (click)="addTaches()"></button>
+                                                        </div>
+
+                                                    </div>
+                                            </p-tabPanel>
+                                            <p-tabPanel header="Liste {{item.taches?.length > 0 ? '(' + item.taches?.length + ')' : ''}}">
+                                                    <div class="card">
+                                                        <p-table [value]="item.taches" [scrollable]="true" scrollHeight="200px">
+                                                            <ng-template pTemplate="header">
+                                                                <tr>
+                                                                                <th>Code</th>
+                                                                                <th>Nom</th>
+                                                                                <th>Prenom</th>
+                                                                                <th>Email</th>
+                                                                                <th>Tele</th>
+                                                                                <th>Titre</th>
+                                                                                <th>Salaire</th>
+                                                                                <th>Collaborateur</th>
+                                                                    <th>Actions</th>
+                                                                </tr>
+                                                            </ng-template>
+                                                            <ng-template pTemplate="body" let-p>
+                                                                <tr>
+                                                                                <td>{{p.code}}</td>
+                                                                                <td>{{p.nom}}</td>
+                                                                                <td>{{p.prenom}}</td>
+                                                                                <td>{{p.email}}</td>
+                                                                                <td>{{p.tele}}</td>
+                                                                                <td>{{p.titre}}</td>
+                                                                                <td>{{p.salaire}}</td>
+                                                                            <td>{{p.collaborateur?.code}}</td>
+                                                                    <td>
+                                                                        <button (click)="deleteTache(p)" pButton type="button" icon="pi pi-times"  class="p-button-rounded p-button-danger"></button>
+                                                                        <button (click)="editTache(p)" pButton type="button" icon="pi pi-pencil" class="p-button-rounded p-button-success mr-2"></button>
+                                                                    </td>
+                                                                </tr>
+                                                            </ng-template>
+                                                        </p-table>
+                                                    </div>
+
+                                            </p-tabPanel>
+                                        </p-tabView>
+                                    </p-tabPanel>
+
+                                    <p-tabPanel header="projetRemarques">
+                                        <p-tabView [(activeIndex)]="activeTab">
+                                            <p-tabPanel header="Création">
+                                                    <div class="grid">
+                                                                    <div class="field col-12 md:col-4">
+                                                                        <label for="1">Code<span style="color: red;">*</span></label>
+                                                                        <input class="mb-2 mr-2" type="text" pInputText placeholder="Code"
+                                                                               id="1" [(ngModel)]="remarquesElement.code" autofocus  [ngClass]="{'ng-invalid ng-dirty' : !validRemarquesCode}"  >
+                                                                        <small class='p-error' *ngIf='!validRemarquesCode'>Code est obligatoire.</small>
+                                                                    </div>
+                                                                    <div class="field col-12 md:col-4">
+                                                                        <label for="2">Libelle</label>
+                                                                        <input class="mb-2 mr-2" type="text" pInputText placeholder="Libelle"
+                                                                               id="2" [(ngModel)]="remarquesElement.libelle" autofocus   >
+                                                                        
+                                                                    </div>
+                                                                    <div class="field col-12 md:col-4">
+                                                                        <label for="3">Date remarque</label>
+                                                                        <p-calendar appendTo="body" id="3"  [showTime]="true" [showSeconds]="false" placeholder="Date remarque" [(ngModel)]="remarquesElement.dateRemarque"
+                                                                                dateFormat="{{dateFormat}}" [showIcon]="true"  ></p-calendar>
+                                                                        
+                                                                    </div>
+                                                        <div class="field col-12 md:col-1">
+                                                            <button pButton pRipple type="button" icon="pi pi-plus" class="mt-4" label="OK" (click)="addRemarques()"></button>
+                                                        </div>
+
+                                                    </div>
+                                            </p-tabPanel>
+                                            <p-tabPanel header="Liste {{item.remarques?.length > 0 ? '(' + item.remarques?.length + ')' : ''}}">
+                                                    <div class="card">
+                                                        <p-table [value]="item.remarques" [scrollable]="true" scrollHeight="200px">
+                                                            <ng-template pTemplate="header">
+                                                                <tr>
+                                                                                <th>Code</th>
+                                                                                <th>Libelle</th>
+                                                                                <th>Date remarque</th>
+                                                                    <th>Actions</th>
+                                                                </tr>
+                                                            </ng-template>
+                                                            <ng-template pTemplate="body" let-p>
+                                                                <tr>
+                                                                                <td>{{p.code}}</td>
+                                                                                <td>{{p.libelle}}</td>
+                                                                                <td>{{p.dateRemarque | date: dateFormatColumn}}</td>
+                                                                    <td>
+                                                                        <button (click)="deleteRemarque(p)" pButton type="button" icon="pi pi-times"  class="p-button-rounded p-button-danger"></button>
+                                                                        <button (click)="editRemarque(p)" pButton type="button" icon="pi pi-pencil" class="p-button-rounded p-button-success mr-2"></button>
+                                                                    </td>
+                                                                </tr>
+                                                            </ng-template>
+                                                        </p-table>
+                                                    </div>
+
+                                            </p-tabPanel>
+                                        </p-tabView>
+                                    </p-tabPanel>
+
+
+                        </p-tabView>
+
+            </ng-template>
+
+            <ng-template pTemplate="footer" >
+                <div class="grid-step">
+                        <div style="margin-left: auto;">
+                            <button pButton pRipple  label="{{'validate' | translate}}"  icon="pi pi-check" style="margin:10px" (click)="save()"></button>
+                        </div>
+                        <div>
+                            <button pButton pRipple  label="{{'cancel' | translate}}" icon="pi pi-times" class="p-button-outlined" (click)="hideCreateDialog()"></button>
+                        </div>
+
+                </div>
+            </ng-template>
+
+            <app-type-projet-create-admin></app-type-projet-create-admin>
+            <app-client-create-admin></app-client-create-admin>
+            <app-chef-projet-create-admin></app-chef-projet-create-admin>
+
+
+    </p-dialog>

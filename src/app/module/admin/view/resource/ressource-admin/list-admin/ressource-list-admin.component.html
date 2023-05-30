@@ -1,0 +1,245 @@
+<div class="grid">
+    <div class="col-12">
+        <p-toast></p-toast>
+        <div class="card">
+            <p-toolbar styleClass="mb-4">
+                <ng-template pTemplate="left">
+                                        <button pButton pRipple label=" {{'new' | translate}}" icon="pi pi-plus" class="p-button-success mr-2 mb-2" (click)="openCreate('Ressource')"></button>
+                    <button [disabled]="isSelectionDisabled()" pButton pRipple label=" {{'delete' | translate}}" icon="pi pi-trash" class="p-button-danger mr-2 mb-2" (click)=deleteMultiple()></button>
+                    <button pButton pRipple label=" {{'search' | translate}}" icon="pi pi-{{findByCriteriaShow?'angle-down':'angle-right'}}" class="p-button-warning mr-2 mb-2" (click)="this.showSearch()"></button>
+                </ng-template>
+                <ng-template pTemplate="right">
+                    <div class="flex">
+                        <p-splitButton label=" {{'export' | translate}}" icon="pi pi-download" styleClass="p-button-help" [model]="excelPdfButons"></p-splitButton>
+                    </div>
+                </ng-template>
+
+            </p-toolbar>
+            <p-toolbar *ngIf="findByCriteriaShow">
+
+                <div class="align-form-search">
+                        <span class=" p-float-label mr-3 align-search-items mt-4">
+                            <input class="mr-2" pInputText id="1" type="text"  [(ngModel)]="criteria.codeLike">
+                            <label for="1">{{'Code' | translate}}</label>
+                        </span>
+                        <span class=" p-float-label mr-3 align-search-items mt-4">
+                            <input class="mr-2" pInputText id="2" type="text"  [(ngModel)]="criteria.nomLike">
+                            <label for="2">{{'Nom' | translate}}</label>
+                        </span>
+                        <span class=" p-float-label mr-3 align-search-items mt-4">
+                            <p-inputNumber class="mr-2" mode="decimal" [(ngModel)]="criteria.prixMin" id="3-1"></p-inputNumber>
+                            <label for="3-1">{{'Prix' | translate}} Min</label>
+                        </span>
+                       <span class=" p-float-label mr-3 align-search-items mt-4">
+                            <p-inputNumber class="mr-2" mode="decimal" [(ngModel)]="criteria.prixMax" id="3-2"></p-inputNumber>
+                            <label for="3-2">{{'Prix' | translate}} Max</label>
+                       </span>
+                        <span class=" p-float-label mr-3 align-search-items mt-4">
+                            <p-inputNumber class="mr-2" mode="decimal" [(ngModel)]="criteria.coutMin" id="4-1"></p-inputNumber>
+                            <label for="4-1">{{'Cout' | translate}} Min</label>
+                        </span>
+                       <span class=" p-float-label mr-3 align-search-items mt-4">
+                            <p-inputNumber class="mr-2" mode="decimal" [(ngModel)]="criteria.coutMax" id="4-2"></p-inputNumber>
+                            <label for="4-2">{{'Cout' | translate}} Max</label>
+                       </span>
+                        <span class=" p-float-label mr-3 align-search-items mt-4">
+                            <input class="mr-2" pInputText id="5" type="text"  [(ngModel)]="criteria.typeLike">
+                            <label for="5">{{'Type' | translate}}</label>
+                        </span>
+                        <span class=" p-float-label mr-3 align-search-items mt-4">
+                            <input class="mr-2" pInputText id="6" type="text"  [(ngModel)]="criteria.uniteLike">
+                            <label for="6">{{'Unite' | translate}}</label>
+                        </span>
+                        <span class=" p-float-label mr-3 align-search-items mt-4">
+                            <p-dropdown [options]="fournisseurs" [(ngModel)]="criteria.fournisseur" id="7" [filter]="true"
+                                        [showClear]="true"  placeholder="{{'Fournisseur' | translate}}" optionLabel="code">
+                            </p-dropdown>
+                        </span>
+                        <span class=" p-float-label mr-3 align-search-items mt-4">
+                            <p-dropdown [options]="materiels" [(ngModel)]="criteria.materiel" id="8" [filter]="true"
+                                        [showClear]="true"  placeholder="{{'Materiel' | translate}}" optionLabel="libelle">
+                            </p-dropdown>
+                        </span>
+                        <span class=" p-float-label mr-3 align-search-items mt-4">
+                            <p-dropdown [options]="collaborateurs" [(ngModel)]="criteria.collaborateur" id="9" [filter]="true"
+                                        [showClear]="true"  placeholder="{{'Collaborateur' | translate}}" optionLabel="code">
+                            </p-dropdown>
+                        </span>
+                        <span class=" p-float-label mr-3 align-search-items mt-4">
+                            <p-dropdown [options]="entiteAdministratives" [(ngModel)]="criteria.entiteAdministrative" id="10" [filter]="true"
+                                        [showClear]="true"  placeholder="{{'Entite administrative' | translate}}" optionLabel="libelle">
+                            </p-dropdown>
+                        </span>
+                </div>
+
+                <div class="align-search-button">
+                    <button pButton pRipple label="{{'validate' | translate}}" icon="pi pi-sort-amount-down" class="p-button-info mr-2" (click)="findPaginatedByCriteria()"></button>
+                </div>
+            </p-toolbar>
+
+
+            <p-table #dt [value]="items" [columns]="cols" [rows]="8" [paginator]="false"
+                    [globalFilterFields]="['code', 'nom', 'prix', 'cout', 'type', 'unite', 'fournisseurcode', 'materiellibelle', 'collaborateurcode', 'entiteAdministrativelibelle']" [(selection)]="selections"
+                    [rowHover]="true" dataKey="id" styleClass="p-datatable-customers"
+                    currentPageReportTemplate="{{'Les éléments de {first} à {last} sur {totalRecords} ' | translate}}"
+                    [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50]" selectionMode="multiple">
+                <ng-template pTemplate="caption">
+                    <div class="flex flex-column flex-row justify-content-between table-header">
+                        <h5 class="p-m-0">{{'ressourceHeader' | translate}}</h5>
+                        <span class="p-input-icon-left ml-auto">
+                            <i class="pi pi-search"></i>
+                            <input pInputText type="text" placeholder="{{'searchInput' | translate}}" (input)="dt.filterGlobal($event.target.value, 'contains')"/>
+                        </span>
+                    </div>
+                </ng-template>
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th style="width: 3rem">
+                            <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                        </th>
+                                
+                        <th pSortableColumn="code">
+                            <div class="p-d-flex p-jc-between p-ai-center">
+                                <span>{{'Code' | translate}}</span>
+                                <p-sortIcon field="code"></p-sortIcon>
+                                <p-columnFilter type="text" field="element.code" display="menu" class="ml-auto"></p-columnFilter>
+                            </div>
+                        </th>
+                                
+                                
+                        <th pSortableColumn="nom">
+                            <div class="p-d-flex p-jc-between p-ai-center">
+                                <span>{{'Nom' | translate}}</span>
+                                <p-sortIcon field="nom"></p-sortIcon>
+                                <p-columnFilter type="text" field="element.nom" display="menu" class="ml-auto"></p-columnFilter>
+                            </div>
+                        </th>
+                                
+                                
+                        <th pSortableColumn="prix">
+                            <div class="p-d-flex p-jc-between p-ai-center">
+                                <span>{{'Prix' | translate}}</span>
+                                <p-sortIcon field="prix"></p-sortIcon>
+                            </div>
+                        </th>
+                                
+                                
+                        <th pSortableColumn="cout">
+                            <div class="p-d-flex p-jc-between p-ai-center">
+                                <span>{{'Cout' | translate}}</span>
+                                <p-sortIcon field="cout"></p-sortIcon>
+                            </div>
+                        </th>
+                                
+                                
+                        <th pSortableColumn="type">
+                            <div class="p-d-flex p-jc-between p-ai-center">
+                                <span>{{'Type' | translate}}</span>
+                                <p-sortIcon field="type"></p-sortIcon>
+                                <p-columnFilter type="text" field="element.type" display="menu" class="ml-auto"></p-columnFilter>
+                            </div>
+                        </th>
+                                
+                                
+                        <th pSortableColumn="unite">
+                            <div class="p-d-flex p-jc-between p-ai-center">
+                                <span>{{'Unite' | translate}}</span>
+                                <p-sortIcon field="unite"></p-sortIcon>
+                                <p-columnFilter type="text" field="element.unite" display="menu" class="ml-auto"></p-columnFilter>
+                            </div>
+                        </th>
+                                
+                                
+                        <th pSortableColumn="fournisseur">
+                            <div class="p-d-flex p-jc-between p-ai-center">
+                                <span>{{'Fournisseur' | translate}}</span>
+                                <p-sortIcon field="fournisseur"></p-sortIcon>
+                            </div>
+                        </th>
+                                
+                                
+                        <th pSortableColumn="materiel">
+                            <div class="p-d-flex p-jc-between p-ai-center">
+                                <span>{{'Materiel' | translate}}</span>
+                                <p-sortIcon field="materiel"></p-sortIcon>
+                            </div>
+                        </th>
+                                
+                                
+                        <th pSortableColumn="collaborateur">
+                            <div class="p-d-flex p-jc-between p-ai-center">
+                                <span>{{'Collaborateur' | translate}}</span>
+                                <p-sortIcon field="collaborateur"></p-sortIcon>
+                            </div>
+                        </th>
+                                
+                                <!-- 
+                        <th pSortableColumn="entiteAdministrative">
+                            <div class="p-d-flex p-jc-between p-ai-center">
+                                <span>{{'Entite administrative' | translate}}</span>
+                                <p-sortIcon field="entiteAdministrative"></p-sortIcon>
+                            </div>
+                        </th>
+                                --> 
+                        <th>Actions</th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-element>
+                    <tr>
+                        <td>
+                            <p-tableCheckbox [value]="element"></p-tableCheckbox>
+                        </td>
+                            
+                        <td>{{element.code}}</td>
+                            
+                            
+                        <td>{{element.nom}}</td>
+                            
+                            
+                        <td>{{element.prix}}</td>
+                            
+                            
+                        <td>{{element.cout}}</td>
+                            
+                            
+                        <td>{{element.type}}</td>
+                            
+                            
+                        <td>{{element.unite}}</td>
+                            
+                            
+                        <td>{{element.fournisseur?.code}}</td>
+                            
+                            
+                        <td>{{element.materiel?.libelle}}</td>
+                            
+                            
+                        <td>{{element.collaborateur?.code}}</td>
+                            
+                             <!-- 
+                        <td>{{element.entiteAdministrative?.libelle}}</td>
+                             --> 
+                        <td>
+                            <button pButton pRipple icon="pi pi-pencil"  class="p-button-rounded p-button-success mr-2" (click)="edit(element)"></button>
+                            <button pButton pRipple icon="pi pi-list" class="p-button-rounded p-button-info mr-2" (click)="view(element)"></button>
+                            <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-danger mr-2" (click)="delete(element)"></button>
+                            <button pButton pRipple icon="pi pi-copy" class="p-button-rounded p-button-raised p-button-warning" (click)="duplicate(element)"></button>
+                        </td>
+                    </tr>
+                </ng-template>
+
+                <ng-template pTemplate="summary">
+                    <p-paginator  [rows]="10" [totalRecords]="totalRecords" (onPageChange)="onPage($event)"></p-paginator>
+                    <div class="p-d-flex p-ai-center p-jc-between">
+                        En totale il {{items ? totalRecords == 1 ? 'y a' : 'y a' : 'y a' }} {{items ? totalRecords : 0 }} {{items ? totalRecords == 1 ? 'ressource' : 'ressources' : 0 }}.
+                    </div>
+                </ng-template>
+            </p-table>
+        </div>
+
+        <app-ressource-create-admin></app-ressource-create-admin>
+        <app-ressource-edit-admin></app-ressource-edit-admin>
+        <app-ressource-view-admin></app-ressource-view-admin>
+        <p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>
+    </div>
+</div>

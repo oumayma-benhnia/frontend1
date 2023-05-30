@@ -1,0 +1,106 @@
+        <p-dialog [(visible)]="createDialog" [style]="{width: '70vw'}" header="{{'ressourceTabPan' | translate}}" [modal]="true" styleClass="p-fluid" [maximizable]="true" [draggable]="false" [resizable]="false">
+            <ng-template pTemplate="content" >
+                        <p-tabView>
+                            <p-tabPanel header="{{'ressourceTabPan' | translate}}">
+                                <div class="grid">
+
+                                                <div class="field col-12 md:col-3">
+                                                    <label for="1">{{'ressourceCode' | translate}}<span style="color: red;">*</span></label>
+                                                    <input class="mb-2 mr-2" type="text" pInputText  placeholder="{{'ressourceCode' | translate}}" id="1" [(ngModel)]="item.code"
+                                                            [ngClass]="{'ng-invalid ng-dirty' : !validRessourceCode}"  />
+                                                    <small class='p-error' *ngIf='!validRessourceCode'>Code est obligatoire.</small>
+                                                </div>
+
+
+
+                                                <div class="field col-12 md:col-3">
+                                                    <label for="2">{{'ressourceNom' | translate}}</label>
+                                                    <input class="mb-2 mr-2" type="text" pInputText  placeholder="{{'ressourceNom' | translate}}" id="2" [(ngModel)]="item.nom"
+                                                             />
+                                                    
+                                                </div>
+
+
+
+                                                <div class="field col-12 md:col-3">
+                                                    <label for="3">{{'ressourcePrix' | translate}}</label>
+                                                    <p-inputNumber class="mb-2 mr-2" id="3" placeholder="{{'ressourcePrix' | translate}}" [(ngModel)]="item.prix"  >
+                                                    </p-inputNumber>
+                                                    
+                                                </div>
+
+                                                <div class="field col-12 md:col-3">
+                                                    <label for="4">{{'ressourceCout' | translate}}</label>
+                                                    <p-inputNumber class="mb-2 mr-2" id="4" placeholder="{{'ressourceCout' | translate}}" [(ngModel)]="item.cout"  >
+                                                    </p-inputNumber>
+                                                    
+                                                </div>
+
+                                                <div class="field col-12 md:col-3">
+                                                    <label for="5">{{'ressourceType' | translate}}</label>
+                                                    <input class="mb-2 mr-2" type="text" pInputText  placeholder="{{'ressourceType' | translate}}" id="5" [(ngModel)]="item.type"
+                                                             />
+                                                    
+                                                </div>
+
+
+
+                                                <div class="field col-12 md:col-3">
+                                                    <label for="6">{{'ressourceUnite' | translate}}</label>
+                                                    <input class="mb-2 mr-2" type="text" pInputText  placeholder="{{'ressourceUnite' | translate}}" id="6" [(ngModel)]="item.unite"
+                                                             />
+                                                    
+                                                </div>
+
+
+
+                                            <div class="field col-11 md:col-2">
+                                                <label for="7">{{'ressourceFournisseur' | translate}}</label>
+                                                <p-dropdown  appendTo="body"  [options]="fournisseurs" [(ngModel)]="item.fournisseur" id="7" [filter]="true" filterMatchMode="contains"
+                                                        [showClear]="true" optionLabel="code" placeholder="{{'ressourceFournisseur' | translate}}"  >
+                                                </p-dropdown>
+                                                
+                                            </div>
+                                            <div class="field col-11 md:col-2">
+                                                <label for="8">{{'ressourceMateriel' | translate}}</label>
+                                                <p-dropdown  appendTo="body"  [options]="materiels" [(ngModel)]="item.materiel" id="8" [filter]="true" filterMatchMode="contains"
+                                                        [showClear]="true" optionLabel="libelle" placeholder="{{'ressourceMateriel' | translate}}"  >
+                                                </p-dropdown>
+                                                
+                                            </div>
+                                            <div class="field col-11 md:col-2">
+                                                <label for="9">{{'ressourceCollaborateur' | translate}}</label>
+                                                <p-dropdown  appendTo="body"  [options]="collaborateurs" [(ngModel)]="item.collaborateur" id="9" [filter]="true" filterMatchMode="contains"
+                                                        [showClear]="true" optionLabel="code" placeholder="{{'ressourceCollaborateur' | translate}}"  >
+                                                </p-dropdown>
+                                                
+                                            </div>
+                                            <div class="field col-11 md:col-2">
+                                                <label for="10">{{'ressourceEntiteAdministrative' | translate}}</label>
+                                                <p-dropdown  appendTo="body"  [options]="entiteAdministratives" [(ngModel)]="item.entiteAdministrative" id="10" [filter]="true" filterMatchMode="contains"
+                                                        [showClear]="true" optionLabel="libelle" placeholder="{{'ressourceEntiteAdministrative' | translate}}"  >
+                                                </p-dropdown>
+                                                
+                                            </div>
+                                </div>
+                            </p-tabPanel>
+
+                        </p-tabView>
+
+            </ng-template>
+
+            <ng-template pTemplate="footer" >
+                <div class="grid-step">
+                        <div style="margin-left: auto;">
+                            <button pButton pRipple  label="{{'validate' | translate}}"  icon="pi pi-check" style="margin:10px" (click)="save()"></button>
+                        </div>
+                        <div>
+                            <button pButton pRipple  label="{{'cancel' | translate}}" icon="pi pi-times" class="p-button-outlined" (click)="hideCreateDialog()"></button>
+                        </div>
+
+                </div>
+            </ng-template>
+
+
+
+    </p-dialog>

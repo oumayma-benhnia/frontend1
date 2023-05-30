@@ -1,0 +1,75 @@
+        <p-dialog [(visible)]="editDialog" [style]="{width: '70vw'}" header="{{'paiementTabPan' | translate}}" [modal]="true" styleClass="p-fluid" [maximizable]="true" [draggable]="false" [resizable]="false">
+            <ng-template pTemplate="content" >
+                <p-tabView>
+                    <p-tabPanel header="{{'paiementTabPan' | translate}}">
+                        <div class="grid">
+
+
+                                        <div class="field col-12 md:col-6">
+                                            <label for="1">{{'paiementCode' | translate}}<span style="color: red;">*</span></label>
+                                            <input   appendTo="body" class="mb-2 mr-2" type="text" pInputText placeholder="{{'paiementCode' | translate}}" id="1" [(ngModel)]="item.code"
+                                                    [ngClass]="{'ng-invalid ng-dirty' : !validPaiementCode}"  />
+                                            <small class='p-error' *ngIf='!validPaiementCode'>Code est obligatoire.</small>
+                                        </div>
+
+                                    <div class="field col-11 md:col-5">
+                                            <label for="2">{{'paiementFacture' | translate}}</label>
+                                            <p-dropdown   appendTo="body" [options]="factures" [(ngModel)]="item.facture" id="2"[filter]="true" filterMatchMode="contains"
+                                                    [showClear]="true" optionLabel="libelle" placeholder="{{'paiementFacture' | translate}}"  >
+                                            </p-dropdown>
+                                            
+                                        </div>
+                                        <div class="col-1">
+                                            <label></label>
+                                            <button pButton pRipple type="button" icon="pi pi-plus" (click)="openCreateFacture('Facture')" class="p-button-success one-colonne-btn-success-align"></button>
+                                        </div>
+
+                                        <div class="field col-12 md:col-6">
+                                            <label for="3">{{'paiementDatePaiement' | translate}}</label>
+                                            <p-calendar appendTo="body" id="3"   [showTime]="true" [showSeconds]="false" placeholder="{{'paiementDatePaiement' | translate}}"  [(ngModel)]="item.datePaiement"
+                                                      >
+                                            </p-calendar>
+                                            
+                                        </div>
+
+                                        <div class="field col-12 md:col-6">
+                                            <label for="4">{{'paiementMontant' | translate}}</label>
+                                            <p-inputNumber  appendTo="body" class="mb-2 mr-2" id="4"
+                                                           placeholder="{{'paiementMontant' | translate}}" [(ngModel)]="item.montant"  >
+                                            </p-inputNumber>
+                                            
+                                        </div>
+
+                                    <div class="field col-11 md:col-5">
+                                            <label for="5">{{'paiementMoyenPaiement' | translate}}</label>
+                                            <p-dropdown   appendTo="body" [options]="moyenPaiements" [(ngModel)]="item.moyenPaiement" id="5"[filter]="true" filterMatchMode="contains"
+                                                    [showClear]="true" optionLabel="code" placeholder="{{'paiementMoyenPaiement' | translate}}"  >
+                                            </p-dropdown>
+                                            
+                                        </div>
+                                        <div class="col-1">
+                                            <label></label>
+                                            <button pButton pRipple type="button" icon="pi pi-plus" (click)="openCreateMoyenPaiement('MoyenPaiement')" class="p-button-success one-colonne-btn-success-align"></button>
+                                        </div>
+                        </div>
+                    </p-tabPanel>
+
+                </p-tabView>
+            </ng-template>
+
+            <ng-template pTemplate="footer" >
+                <div class="grid-footer">
+                        <div>
+                            <button pButton pRipple label="Annuler" icon="pi pi-times" class="p-button-outlined" (click)="hideEditDialog()"></button>
+                        </div>
+                    <div>
+                        <button pButton pRipple label="Valider" icon="pi pi-check" style="margin:10px" (click)="edit()"></button>
+                    </div>
+                </div>
+            </ng-template>
+
+                    <app-facture-create-admin></app-facture-create-admin>
+                    <app-moyen-paiement-create-admin></app-moyen-paiement-create-admin>
+
+
+    </p-dialog>

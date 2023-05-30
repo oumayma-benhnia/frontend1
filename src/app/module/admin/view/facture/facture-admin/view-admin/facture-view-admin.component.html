@@ -1,0 +1,52 @@
+
+<p-dialog [(visible)]="viewDialog" [style]="{width: '70vw'}" header="{{'factureTabPan' | translate}}" [modal]="true" styleClass="p-fluid">
+    <ng-template pTemplate="content">
+        <p-tabView>
+            <p-tabPanel header="{{'factureTabPan' | translate}}">
+                <div class="grid">
+                    <div class="field col-12 md:col-4">
+                        <label for="1">{{'Reference' | translate}}</label>
+                        <input class="mb-2 mr-2" type="text" pInputText [disabled]="true" placeholder="{{'Reference' | translate}}" autofocus  id="1" [(ngModel)]="item.reference">
+                    </div>
+                    <div class="field col-12 md:col-4">
+                        <label for="2">{{'Libelle' | translate}}</label>
+                        <input class="mb-2 mr-2" type="text" pInputText [disabled]="true" placeholder="{{'Libelle' | translate}}" autofocus  id="2" [(ngModel)]="item.libelle">
+                    </div>
+                    <div class="field col-12 md:col-4">
+                        <label for="3">{{'Montant' | translate}}</label>
+                        <p-inputNumber class="mb-2 mr-2" id="3" [disabled]="true" placeholder="{{'Montant' | translate}}" [(ngModel)]="item.montant"></p-inputNumber>
+                    </div>
+                    <div class="field col-12 md:col-4">
+                        <label for="4">{{'Date emission' | translate}}</label>
+                        <p-calendar id="4" [disabled]="true"  [showTime]="true" [showSeconds]="false" placeholder="{{'Date emission' | translate}}"  [(ngModel)]="item.dateEmission" dateFormat="{{dateFormat}}"></p-calendar>
+                    </div>
+                    <div class="field col-12 md:col-4">
+                        <label for="5">{{'Date echeance' | translate}}</label>
+                        <p-calendar id="5" [disabled]="true"  [showTime]="true" [showSeconds]="false" placeholder="{{'Date echeance' | translate}}"  [(ngModel)]="item.dateEcheance" dateFormat="{{dateFormat}}"></p-calendar>
+                    </div>
+                    <div class="field col-12 md:col-4">
+                        <label for="6">{{'Comptable' | translate}}</label>
+                        <p-dropdown [options]="comptables" [(ngModel)]="item.comptable" id="6" [disabled]="true" optionLabel="code" placeholder="{{'Comptable' | translate}}"></p-dropdown>
+                    </div>
+                    <div class="field col-12 md:col-4">
+                        <label for="7">{{'Projet' | translate}}</label>
+                        <p-dropdown [options]="projets" [(ngModel)]="item.projet" id="7" [disabled]="true" optionLabel="code" placeholder="{{'Projet' | translate}}"></p-dropdown>
+                    </div>
+                </div>
+            </p-tabPanel>
+
+        </p-tabView>
+
+    </ng-template>
+
+    <ng-template pTemplate="footer" >
+        <div class="grid-footer">
+            <div>
+                <button pButton pRipple label="Annuler" icon="pi pi-times" class="p-button-outlined" (click)="hideViewDialog()"></button>
+            </div>
+        </div>
+    </ng-template>
+</p-dialog>
+
+
+
