@@ -52,7 +52,7 @@ import {SelectButtonModule} from "primeng/selectbutton";
 import {TranslateHttpLoader} from "@ngx-translate/http-loader";
 import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {ServiceLocator} from './zynerator/service/ServiceLocator';
-import { ProgressButtonComponent } from './module/admin/progress-button/progress-button.component';
+import { ProgressButtonComponent } from './module/admin/login-admin/progress-button/progress-button.component';
 import { ProgressButtonModule } from '@syncfusion/ej2-angular-splitbuttons';
 
 export function HttpLoaderFactory(http: HttpClient) {
