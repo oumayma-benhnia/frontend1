@@ -52,13 +52,15 @@ import {SelectButtonModule} from "primeng/selectbutton";
 import {TranslateHttpLoader} from "@ngx-translate/http-loader";
 import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {ServiceLocator} from './zynerator/service/ServiceLocator';
-
+import { ProgressButtonComponent } from './module/admin/progress-button/progress-button.component';
+import { ProgressButtonModule } from '@syncfusion/ej2-angular-splitbuttons';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
 }
 @NgModule({
 imports: [
+
   ButtonModule,
   PasswordModule,
   FormsModule,
@@ -98,8 +100,12 @@ imports: [
   }
   })
 ],
+
+
+
+
 declarations: [
-  AppComponent,
+
   AccessDeniedComponent,
 
   AppMainComponent,
@@ -110,7 +116,8 @@ declarations: [
   AppTopBarComponent,
   AppFooterComponent,
   UserListComponent,
-  HomeComponent
+  HomeComponent,
+  AppComponent
 ],
 providers: [
 /*    { provide: LocationStrategy, useClass: HashLocationStrategy }, */

@@ -1,7 +1,7 @@
-<div class="p-px-4 ">
+<!--<div class="p-px-4 ">
     <br><br>
     <div class="flex flex-column justify-content-center pb-5 mx-auto align-items-center">
-        <img src="../../../assets/images/acceuil.png" class="fostrap-logo" /><br>
+        <img src="../../../assets/images/Trust%20Logo.png" class="fostrap-logo" /><br>
         <h1 class="heading"> Bienvenue dans votre application </h1>
     </div>
     <div class="grid">
@@ -12,7 +12,7 @@
             <p-card (click)="redirectAdmin()" header="Espace Administrateur" class="card"
                     [style]="{'width': '25rem', 'margin-bottom': '2em'}">
                 <ng-template pTemplate="header">
-                    <img class="img-card" src="../../../assets/images/admin.png">
+                    <img class="img-card" src="../../../assets/images/image-admin%20jpeg.jpeg">
                 </ng-template>
                 <p>describe!</p>
             </p-card>
@@ -22,4 +22,42 @@
     </div>
 </div>
 <br><br><br><br>
-<app-footer></app-footer>
+<app-footer></app-footer>-->
+<!DOCTYPE html>
+<!-- Coding By CodingNepal - codingnepalweb.com -->
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Trust Tech</title>
+    <link rel="stylesheet" href="home.component.scss" />
+    <!-- Unicons -->
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css" />
+</head>
+<body>
+<!-- Header -->
+<header class="header">
+    <nav class="nav">
+        <a href="#" class="nav_logo">Trust Tech</a>
+        <ul class="nav_items">
+            <li class="nav_item">
+                <a href="#" class="nav_link">Home</a>
+                <a href="#" class="nav_link">Product</a>
+                <a href="#" class="nav_link">Services</a>
+                <a href="#" class="nav_link">Contact</a>
+            </li>
+        </ul>
+        <button class="button" (click)="redirectAdmin()" id="form-open">Login</button>
+    </nav>
+</header>
+<!-- Home -->
+<section class="home">
+    <div class="form_container">
+        <i class="uil uil-times form_close"></i>
+    </div>
+</section>
+
+</body>
+</html>
+

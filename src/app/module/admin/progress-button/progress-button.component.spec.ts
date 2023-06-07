@@ -1,20 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { HomeComponentTs} from './home.component';
+import { ProgressButtonComponent } from './progress-button.component';
 
-describe('HomeComponentTs', () => {
-  let component: HomeComponentTs;
-  let fixture: ComponentFixture<HomeComponentTs>;
+describe('ProgressButtonComponent', () => {
+  let component: ProgressButtonComponent;
+  let fixture: ComponentFixture<ProgressButtonComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ HomeComponentTs ]
+      declarations: [ ProgressButtonComponent ]
     })
     .compileComponents();
-  });
 
-  beforeEach(() => {
-    fixture = TestBed.createComponent(HomeComponentTs);
+    fixture = TestBed.createComponent(ProgressButtonComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
@@ -23,4 +21,3 @@ describe('HomeComponentTs', () => {
     expect(component).toBeTruthy();
   });
 });
-

@@ -1,16 +1,49 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Trust Tech </title>
+    <link rel="stylesheet" href="register-admin.component.scss" />
+    <!-- Unicons -->
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css" />
+</head>
+
+<body>
+
+<!-- Header -->
+<header class="header">
+    <nav class="nav">
+        <a href="#" class="nav_logo"> </a>
+        <ul class="nav_items">
+            <li class="nav_item">
+                <a href="#" class="nav_link"></a>
+                <a href="#" class="nav_link"></a>
+                <a href="#" class="nav_link"></a>
+                <a href="#" class="nav_link"></a>
+          </li>
+        </ul>
+
+    </nav>
+</header>
+
+
 <div class="login-body">
-    <div class="card login-panel p-fluid">
+    <div class="card login-panel p-fluid ">
         <div class="mt-4">
-            <div class="grid" [formGroup]="registerForm">
+            <div class="grid"  [formGroup]="registerForm">
                 <div class="col-12 p-sm-6 md:col-6 logo-container">
-                    <span class="guest-sign-in" style="font-weight: 600;font-size: 2rem;">Inscription</span>
+                    <span class="guest-sign-in"  style="font-weight: 550;font-size: 2rem; color :#6f1285 "> Inscription</span>
                 </div>
 
                 <div class="col-12 username-container">
                     <!-- <h:panelGroup> -->
                     <label>prenom</label>
                     <div class="login-input">
-                        <input formControlName="prenom" class="mb-2 mr-2" type="text" pInputText id="1" required
+                        <input formControlName="prenom" class="mb-2 mr-2" type="text" pInputText  id="1" required
                             autofocus />
                     </div>
                     <!-- </h:panelGroup> -->
@@ -19,7 +52,7 @@
                     <!-- <h:panelGroup> -->
                     <label>nom</label>
                     <div class="login-input">
-                        <input formControlName="nom" class="mb-2 mr-2" type="text" pInputText id="1" required
+                        <input formControlName="nom" class="mb-2 mr-2" type="text" pInputText  id="1" required
                             autofocus />
                     </div>
                     <!-- </h:panelGroup> -->
@@ -53,11 +86,15 @@
                 </div>
 
 
-                <div class="col-12 p-sm-6 md:col-6">
-                    <button pButton type="button" icon="pi pi-check" label="Register" [disabled]="registerForm.invalid"
+                <div class="col-6 md:col-12">
+                    <button pButton type="button" icon="pi pi-check" label="sign up" [disabled]="registerForm.invalid"
                         (click)="submit()"></button>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+
+</body>
+</html>

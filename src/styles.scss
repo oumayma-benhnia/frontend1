@@ -9,7 +9,10 @@ $gutter: 1rem; //for primeflex grid system
 @import "../node_modules/@fullcalendar/timegrid/main.min.css";
 @import "assets/demo/flags/flags.css";
 @import "../node_modules/flag-icons/css/flag-icons.min.css";
-
+@import '../node_modules/@syncfusion/ej2-base/styles/material.css';
+@import '../node_modules/@syncfusion/ej2-buttons/styles/material.css';
+@import '../node_modules/@syncfusion/ej2-popups/styles/material.css';
+@import '../node_modules/@syncfusion/ej2-splitbuttons/styles/material.css';
 .grid-footer {
   align-items: center;
   justify-content: flex-end;

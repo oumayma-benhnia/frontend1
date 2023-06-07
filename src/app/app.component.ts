@@ -7,7 +7,10 @@ import {RoleService} from 'src/app/zynerator/security/Role.service';
 @Component({
     selector: 'app-root',
     templateUrl: './app.component.html',
+
 })
+
+
 export class AppComponent implements OnInit {
     layoutMode = 'static';
     lightMenu = true;

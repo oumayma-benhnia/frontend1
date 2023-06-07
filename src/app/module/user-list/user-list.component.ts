@@ -9,6 +9,7 @@ import {Role} from 'src/app/zynerator/security/Role.model';
 @Component({
   selector: 'app-user-list',
   templateUrl: './user-list.component.html'
+
 })
 export class UserListComponent implements OnInit {
   constructor(private userService:UserService, private messageService: MessageService,
